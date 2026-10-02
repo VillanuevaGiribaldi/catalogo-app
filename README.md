@@ -10,10 +10,19 @@ depuración) publicado)
 | Capa | Imagen | Puerto interno | Puerto publicado |
 | --- | --- | --- | --- |
 | `catalogo-frontend` | React + Vite servido por nginx | 8080 | 3000 |
+
 IMPORTANTE: La variable de entorno
+
     NGINX_ENVSUBST_FILTER=^API_
+
 debe tener el valor indicado, siin ella, las variables propias de nginx serán vaciadas y se genera una configuración invalida.
 | `catalogo-api` | Python + FastAPI | 8000 | 8000 (solo depuración) |
 | `catalogo-db` | MongoDB 7 | 27017 | — |
 El frontend es el único punto de entrada: nadie le habla a la base
 directamente, y a la API le habla el frontend.
+
+| Imagen | Version | Tamaño | Reduccion |
+| :--- | :---: | ---: | ---: |
+| backend | ingenua |  1.71GB | - |
+| backend | definitiva |  258MB | 85.3 % |
+| frontend | definitiva | Texto C | 73.9MB | 
