@@ -72,7 +72,7 @@ SIN_BINARIOS = {"imagen_datos": 0}
 
 
 class ProductoIn(BaseModel):
-    sku: int = Field(ge=1, description="Código único del producto")
+    sku: int = Field(ge=1, description="Código único del producto, identificador del sistema")
     nombre: str = Field(min_length=1, max_length=200)
     precio: float = Field(ge=0)
     categoria: str = Field(default="General", min_length=1, max_length=60)

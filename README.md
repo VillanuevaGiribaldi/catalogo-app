@@ -21,8 +21,8 @@ debe tener el valor indicado, siin ella, las variables propias de nginx serán v
 El frontend es el único punto de entrada: nadie le habla a la base
 directamente, y a la API le habla el frontend.
 
-| Imagen | Version | Tamaño | Reduccion |
-| :--- | :---: | ---: | ---: |
-| backend | ingenua |  1.71GB | - |
-| backend | definitiva |  258MB | 85.3 % |
-| frontend | definitiva | Texto C | 73.9MB | 
+| Imagen | Version | Tamaño | Reduccion | Razonamiento |
+| :--- | :---: | ---: | ---: | ---: |
+| backend | ingenua |  1.71GB | - | simple de implementar y directo, no necesita conocimientos extensos de docker ni node |
+| backend | definitiva |  258MB | 85.3 % | Mucho mas pequeña, separar en una etapa de compilación y otra de servidor reduce overhead inecesario para un entorno de porducción | 
+| frontend | definitiva | Texto C | 73.9MB | basandonos en lo anterior es conveniente usar un build de dos etapas para evitar tener cosas inecesarias (codigo, compiladores y node) |
