@@ -23,29 +23,45 @@ cualquier persona en la misma red del contenedor puede acceder. Si el contenedor
 ## 4
 ### a
 uso el comando:
+
     docker run -d --name catalogo-db -e MONGO_INITDB_ROOT_USERNAME=catalogo_user -e MONGO_INITDB_ROOT_PASSWORD=catalogo_pass mongo:7
 Y tras ejecutar
+
     docker logs -f catalogo-db
 se puede ver:
+
 {"t":{"$date":"2026-09-30T21:57:25.570+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
 
 ## 5
 `ping` no existe en el contenedor.En mongosh, ejecuto
+
     ping: "test"
 Y la salida es
+
     "test"
 Al usar `show databases` la salida es:
+
     MongoServerError[Unauthorized]: Command listDatabases requires authentication
+
 
 ## 6
 ### a
 Ejecuto en el contenedor:
+
     mongosh -u catalogo_user -p catalogo_pass
 Y al usar `show databases` da resultado
+
 ### b
 Ejecuto:
-    mongosh -u catalogo_user -p catalogo_pass ?authSource=admin
+
+    mongosh -u catalogo_user -p catalogo_pass ?--autenticationDatabase=admin
+
+ó
+
+    mongosh mongodb://catalogo_user:catalogo_pass@127.0.0.1:27017/?authSource=admin
+
 Y la salida es:
+
     Current Mongosh Log ID: 6abd8a59464a7461302d90b2
     Connecting to:          mongodb://<credentials>@127.0.0.1:27017/%3FauthSource%3Dadmin?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.10.0
     MongoServerError: Authentication failed.

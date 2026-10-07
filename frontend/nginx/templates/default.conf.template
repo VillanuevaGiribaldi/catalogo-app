@@ -2,7 +2,7 @@ server {
     listen 8080;
     server_name _;
 
-    root /usr/share/nginx/html;
+    root /app-catalogo;
     index index.html;
 
     # Healthcheck propio del frontend: no depende del backend, así el

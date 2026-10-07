@@ -19,7 +19,7 @@ ENV DB_HOST=localhost \
     DB_NAME=catalogodb \
     DB_USER=catalogo_user \
     DB_PASSWORD=catalogo_pass \
-    ROOT_PATH=""
+    ROOT_PATH="/api"
 
 ARG APP_VERSION=v1
 ENV APP_VERSION=${APP_VERSION}

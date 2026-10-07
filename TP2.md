@@ -10,7 +10,7 @@ Dockerfile
 
 El comando de docker es:
 
-    docker build -t catalogo-backend .
+    docker build -t catalogo-backend ./backend
 
 Salida:
 Se ven todos las capas, tarda bastante en las etapas de cargar la imagen de python y hacer el pip install 
