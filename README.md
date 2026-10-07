@@ -23,14 +23,26 @@ directamente, y a la API le habla el frontend.
 
 ### Orden de arranque
 
-1. Iniciar el contenedor de la base de datos mongo con el comando:
+1. Crear la red `catalogo-net`
 
-    docker run --network catalogo-net --name catalogo-db -e MONGO_INITDB_ROOT_USERNAME=catalogo_user -e MONGO_INITDB_ROOT_PASSWORD=catalogo_pass -v catalogo-db-data:/data/db mongo:7
-2. Iniciar el contenedor de la api. La api requiere que la base de datos esté encendida, realiza 10 intentos de conxion y si no lo logra se termina la ejecución del contenedor. Comando de ejecución:
+1. Crear el volumen para la base de datos `catalogo-db-data`
 
-    docker run --name catalogo-api --network catalogo-net -e  DB_HOST=catalogo-db -e DB_PORT=27017 -e DB_NAME=catalogodb -eDB_USER=catalogo_user -e DB_PASSWORD=catalogo_pass -e APP_VERSION=v1 -e ROOT_PATH=/api -e SEED_DEMO=true -p 8000:8000    catalogo-api:v1
+1. Usar Docker build para las imagenes.
 
-3. Inicar el contenedor de nginx, el frontend. Si no se inició antes el contenedor de la api, cuando nginx  intente resolver la dirección de la api, docker no podrá darle una respuesta, causando que finalice la ejecición del contenedor. Comando:
+1. Iniciar el contenedor de la base de datos mongo con el comando:        
+
+        docker run --network catalogo-net --name catalogo-db -e MONGO_INITDB_ROOT_USERNAME=catalogo_user -e MONGO_INITDB_ROOT_PASSWORD=catalogo_pass -v catalogo-db-data:/data/db mongo:7
+2. Crear la imagen e Iniciar el contenedor de la api. La api requiere que la base de datos esté encendida, realiza 10 intentos de conxion y si no lo logra se termina la ejecución del contenedor. Comando de ejecución:
+        docker build --no-cache -t catalogo-api:v1 .\backend\  
+    Luego:
+        
+
+        docker run --name catalogo-api --network catalogo-net -e  DB_HOST=catalogo-db -e DB_PORT=27017 -e DB_NAME=catalogodb -eDB_USER=catalogo_user -e DB_PASSWORD=catalogo_pass -e APP_VERSION=v1 -e ROOT_PATH=/api -e SEED_DEMO=true -p 8000:8000    catalogo-api:v1
+
+3. Crear la imagen a partir del Dockerfile y lugo inicar el contenedor de nginx, el frontend. Si no se inició antes el contenedor de la api, cuando nginx  intente resolver la dirección de la api, docker no podrá darle una respuesta, causando que finalice la ejecición del contenedor. Comando:
+
+        docker build -t catalogo-frontend:v1 .\frontend
+    Luego:
 
     docker run --name catalogo-frontend -e API_HOST=catalogo-api -e API_PORT=8000 -p 3000:8080 --network catalogo-net catalogo-frontend:v1
 
