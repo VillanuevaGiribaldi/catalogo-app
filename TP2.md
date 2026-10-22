@@ -10,14 +10,14 @@ Dockerfile
 
 El comando de docker es:
 
-    docker build -t catalogo-backend ./backend
+    docker build -t catalogo-api ./backend
 
 Salida:
 Se ven todos las capas, tarda bastante en las etapas de cargar la imagen de python y hacer el pip install 
 Resultado:
 
     IMAGE                       ID             DISK USAGE   CONTENT SIZE   EXTRA
-    catalogo-backend:latest     d8ff9f659881       1.71GB          445MB
+    catalogo-api:latest     d8ff9f659881       1.71GB          445MB
 
 ## 2
 El nuevo dockerfile tiene dos etapas.
@@ -134,4 +134,4 @@ Imagen del frontend:
 
 Imagen del backend:
 
-    https://hub.docker.com/repository/docker/camidock1/catalogo-backend
+    https://hub.docker.com/repository/docker/camidock1/catalogo-api
