@@ -86,3 +86,24 @@ En nginx se encontraron las siguientes vulnerabilidades:
 catalogo-db es el único contenedor que requiere capabilities especificas, se requieren las siguientes: [CHOWN, SETUID, SETGID, DAC_OVERRIDE, FOWNER]
 ### TP4 - Ej 12 - Comparación entre docker compose y comandos previos
 En lugar de seguir los pasos en la sección de [Orden de arranque](#orden-de-arranque---sin-compose), uno puede simplemente usar el comando `docker compose up -d` el cual crea todos los componentes necesarios para el funcionamiento del stack de la aplicación, como si se siguiera la guía indicada. Además de la maypr simplicidad y legibilidad, tiene elementos extras de seguridad.
+
+### TP5 - Ej 10
+
+| base | variaciones | descripcion |
+|-----------|-----------|-----------|
+| kubectl get pods   |   -o wide, -w        | Muestra los pods y sus estados          |
+| kubectl run    | catalogo-frontend --image=camidock1/catalogo-frontend:v2 --dry-run=client -o yaml > k8s/pod-catalogo-frontend.yaml          |   Genera un yml base para crear un pod        |
+| kubectl apply    |   -f k8s/pod-catalogo-api.yaml        |  Aplica los cambios realizados al yml indiado y crea el pod         |
+| kubectl delete pod   | catalogo-api, catalogo-db           | elimina un pod deteniendo su ejecucion          |
+| kubectl dete pods    |  -n catalogo-app --all         |         elimina todos los pods de un namespace  |
+|  kubectl port-forward    |  pod/catalogo-api 8000:8000         | Expone los puertos indicados del pod indicado en el host que se ejecuta el comando, usado para depuración          |
+
+### TP5 - Ej 11
+Se tiene: 
+- Nombres básicos
+- Los contenedores corriendo
+
+Falta:
+- resolución de nombres de host en funcion de los nombre de pods
+- healthchecks y orden de arranque automático
+- cap_drop
