@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: catalogo-frontend
+  name: catalogo-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catalogo-frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: catalogo-frontend
+    spec:
+      containers:
+      - image: camidock1/catalogo-frontend:v2
+        name: catalogo-frontend
+        resources: {}
+        env:
+        - name: API_HOST
+          value: "catalogo-api"
+        - name: API_PORT
+          value: "8000"
+status: {}

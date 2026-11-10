@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: catalogo-api
+  name: catalogo-api
+spec:
+  ports:
+  - name: 8000-8000
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: catalogo-api
+  type: ClusterIP
+status:
+  loadBalancer: {}

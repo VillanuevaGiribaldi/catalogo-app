@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: catalogo-api
+  name: catalogo-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catalogo-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: catalogo-api
+    spec:
+      containers:
+      - image: camidock1/catalogo-api:v2
+        name: catalogo-api
+        resources: {}
+        ports:
+        - containerPort: 8000
+        env:
+          - name: DB_HOST
+            value: "catalogo-db"
+          - name: DB_PORT
+            value: "27017"
+          - name: DB_NAME
+            value: "catalogodb"
+          - name: DB_USER
+            value: "catalogo_user"
+          - name: DB_PASSWORD
+            value: "catalogo_pass"
+          - name: ROOT_PATH
+            value: "/api"
+          - name: SEED_DEMO
+            value: "true"
+status: {}

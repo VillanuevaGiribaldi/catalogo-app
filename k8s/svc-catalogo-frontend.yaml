@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: catalogo-frontend
+  name: catalogo-frontend
+spec:
+  ports:
+  - name: 30302-8080
+    nodePort: 30302
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: catalogo-frontend
+  type: NodePort
+status:
+  loadBalancer: {}

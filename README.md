@@ -107,3 +107,7 @@ Falta:
 - resolución de nombres de host en funcion de los nombre de pods
 - healthchecks y orden de arranque automático
 - cap_drop
+### TP6 - Ej 5
+Service de depuración: `catalogo-api-debug`
+### TP6 - Ej 9
+Actualmente la bd no tiene persistencia si se elimina el volumen

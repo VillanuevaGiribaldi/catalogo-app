@@ -62,7 +62,7 @@ En `kubectl get pods -A` aparece:
 ### catalogo-api
 Creación de `catalogo-api`
 
-                 kubectl run catalogo-api --image=camidock1/catalogo-api:v1 --dry-run=client -o yaml > k8s/pod-catalogo-api.yaml
+                 kubectl run catalogo-api --image=camidock1/catalogo-api:v2 --dry-run=client -o yaml > k8s/pod-catalogo-api.yaml
 
 aplicar:
 
@@ -74,7 +74,7 @@ En la lista:
 ### catalogo-frontend
 Creación de `catalogo-frontend`
 
-                 kubectl run catalogo-frontend --image=camidock1/catalogo-frontend:v1 --dry-run=client -o yaml > k8s/pod-catalogo-frontend.yaml
+                 kubectl run catalogo-frontend --image=camidock1/catalogo-frontend:v2 --dry-run=client -o yaml > k8s/pod-catalogo-frontend.yaml
 
 
 aplicar:
