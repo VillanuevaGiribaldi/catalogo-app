@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  API_HOST: catalogo-api
+  API_PORT: "8000"
+kind: ConfigMap
+metadata:
+  name: catalogo-frontend-config

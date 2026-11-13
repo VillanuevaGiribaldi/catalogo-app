@@ -111,3 +111,23 @@ Falta:
 Service de depuración: `catalogo-api-debug`
 ### TP6 - Ej 9
 Actualmente la bd no tiene persistencia si se elimina el volumen
+
+### TP7 - Ej 10 - los objetos del cluster
+#### pods:
+- catalogo-db: Pod individual que utiliza la imagen de `mongo:7`. No tiene salida a internet y solo se comunica con la api
+- catalogo-api: Pod que usa la imagen `camidock1/catalogo-api:v2`, recibe los pedidos y se comunica con catalogo-db
+- catalogo-frontend: Pod que usa la imagen `camidock1/catalogo-frontend:v1`. Proxi de nginx que recibe todos los pedidos de los usuario y responde con html o redirecciona el request a la api
+#### services:
+Definen servicios conectados o no a internet a los cuales se le pueden vincular pods mediante hostname
+- svc-catalogo-db: define el servicio de la base de datos como un clusterIP, con un puerto al cual los elementos del cluster pueden llegar
+- svc-catalogo-api: define el servicio de la api como un NodePort, con un puerto al cual se puede llegar desde internet
+- svc-catalogo-frontend: define el servicio del frontend como un NodePort, con un puerto al cual se puede llegar desde internet
+#### deployments:
+Los deploys se relacionan con un servicio y uno puede acceder a los mismos usando el nombre que definió  en el servicio.
+- deploy-catalogo-db: deployment que crea un pod de mongo:7 siguiendo las configuraciones almacenadas en el secret definido
+- deploy-catalogo-api: crea 2 pods de la imagen `camidock1/catalogo-api:v2` usando las configuraciones definidas en el configmap de la api y el secret de la bd
+- deploy-catalogo-frontend: crea dos pods desde la imagen `camidock1/catalogo-frontend:v1` usando las configuraciones definidads en el configmap
+#### PVC
+Es el volumen persistente al que van a acceder los pods de la base de datos, de esta forma todos los pods que se creen de la misma comparten el mismo almacenamiento y no se pierden los datos
+#### Ingress
+Es un proxy por el que se recibe el tráfico de ingreso al cluster y redirecciona a los pods del frontend

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: catalogo-app-ingress
+spec:
+  ingressClassName: nginx # QUÉ controller la atiende
+  rules:
+    - host: catalogo.local # por HOST
+      http:
+        paths:
+          - path: / # por PATH
+            pathType: Prefix
+            backend:  
+              service:      
+                name: catalogo-frontend
+                port:
+                  number: 8080

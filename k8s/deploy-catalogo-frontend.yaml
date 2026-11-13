@@ -19,9 +19,7 @@ spec:
       - image: camidock1/catalogo-frontend:v2
         name: catalogo-frontend
         resources: {}
-        env:
-        - name: API_HOST
-          value: "catalogo-api"
-        - name: API_PORT
-          value: "8000"
+        envFrom:
+          - configMapRef:
+              name: catalogo-frontend-config
 status: {}

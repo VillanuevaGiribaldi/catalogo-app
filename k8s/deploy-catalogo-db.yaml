@@ -21,11 +21,27 @@ spec:
         resources: {}
         ports:
           - containerPort: 27017
+        volumeMounts:
+          - name: datos
+            mountPath: /data/db
         env:
           - name: MONGO_INITDB_ROOT_USERNAME
-            value: "catalogo_user"
+            valueFrom:
+              secretKeyRef:
+                name: catalogo-db-secret
+                key: MONGO_INITDB_ROOT_USERNAME
           - name: MONGO_INITDB_ROOT_PASSWORD
-            value: "catalogo_pass"
+            valueFrom:
+              secretKeyRef:
+                name: catalogo-db-secret
+                key: MONGO_INITDB_ROOT_PASSWORD
           - name: MONGO_INITDB_DATABASE
             value: "catalogodb"
+        envFrom:
+          - configMapRef:
+              name: catalogo-api-config
+      volumes:
+        - name: datos
+          persistentVolumeClaim:
+            claimName: catalogo-db-pvc
 status: {}
