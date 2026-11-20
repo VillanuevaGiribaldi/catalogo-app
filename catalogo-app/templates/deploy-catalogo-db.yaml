@@ -16,7 +16,7 @@ spec:
         app: catalogo-db
     spec:
       containers:
-      - image: mongo:7
+      - image: "{{ .Values.db.image.repository }}:{{ .Values.db.image.tag }}"
         name: mongo
         resources: {}
         ports:

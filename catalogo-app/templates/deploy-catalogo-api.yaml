@@ -5,7 +5,6 @@ metadata:
     app: catalogo-api
   name: catalogo-api
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: catalogo-api
@@ -16,9 +15,15 @@ spec:
         app: catalogo-api
     spec:
       containers:
-      - image: camidock1/catalogo-api:v2
+      - image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
         name: catalogo-api
-        resources: {}
+        resources: 
+          requests:
+            cpu: "100m" # <- contra ESTE número calcula el HPA
+            memory: "64Mi"
+          limits:
+            cpu: "250m"
+            memory: "128Mi"
         ports:
         - containerPort: 8000
         env:

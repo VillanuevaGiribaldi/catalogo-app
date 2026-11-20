@@ -16,7 +16,7 @@ spec:
         app: catalogo-frontend
     spec:
       containers:
-      - image: camidock1/catalogo-frontend:v2
+      - image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}"
         name: catalogo-frontend
         resources: {}
         envFrom:
