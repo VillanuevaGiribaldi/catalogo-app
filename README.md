@@ -1,5 +1,23 @@
 # catalogo-app
-repositorio hecho para el cursado de el curso de docker y  kubernetes de la FACET UNT
+Presentación final del curso de docker-kubernetes.
+En el directorio `catalogo-app/` se encuentran los charts y elementos para iniciar el servicio con helm.
+En `k8s/` están los elementos de kubernetes (deployments, services, etc)
+En `practicos` se encuentran las resoluciones de los practicos a lo largo del cursado.
+En `informe` se encuentran las imagenes usadas en el archivo ARQUITECTURA.MD.
+## Uso de la aplicacion con docker compose
+Puede iniciarse la aplicacion usando docker compose:
+
+        docker compose up
+
+Desde el mismo directorio de el archivo `docker-compose.yaml`
+
+## Uso de la aplicación con helm
+Si se tiene al menos un nodo de kubernetes, con helm instalado, puede iniciarse la aplicación en el mismo con el siguiente comando:
+        
+        helm install catalogo-app ./catalogo-app --set secrets.MONGO_INITDB_ROOT_USERNAME=test_user --set   secret.MONGO_INITDB_ROOT_PASSWORD=test_pass
+Es recomendable remplazaar las contraseñas por unas segura y privadas.
+
+# README antiguo
 ## Arquitectura
 navegador ──► catalogo-frontend ──────► catalogo-api ──────► catalogo-db
 React + Vite Python + FastAPI MongoDB 7
@@ -15,7 +33,7 @@ IMPORTANTE: La variable de entorno
 
     NGINX_ENVSUBST_FILTER=^API_
 
-debe tener el valor indicado, siin ella, las variables propias de nginx serán vaciadas y se genera una configuración invalida.
+debe tener el valor indicado, sin ella, las variables propias de nginx serán vaciadas y se genera una configuración invalida.
 | `catalogo-api` | Python + FastAPI | 8000 | 8000 (solo depuración) |
 | `catalogo-db` | MongoDB 7 | 27017 | — |
 El frontend es el único punto de entrada: nadie le habla a la base

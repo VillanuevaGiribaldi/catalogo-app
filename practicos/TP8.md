@@ -33,8 +33,7 @@ estudiante@curso-docker:~/Descargas/
 
 
 ## 3
-        kubectl run carga --rm -it --restart=Never --image=busybox -- \
-        /bin/sh -c "while true; do wget -q -O- http://catalogo:8000/productos; done"
+        kubectl run carga --rm -it --restart=Never --image=busybox --         /bin/sh -c "while true; do wget -q -O- http://catalogo-api:8000/productos; done"
 
 
          kubectl get hpa -w

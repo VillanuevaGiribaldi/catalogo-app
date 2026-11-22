@@ -27,7 +27,10 @@ frontend:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "v2"
-
+# Secretos de prueba, setearlos al usar helm install
+secrets:
+  MONGO_INITDB_ROOT_USERNAME: catalogo_user
+  MONGO_INITDB_ROOT_PASSWORD: catalogo_pass
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
 # This is to override the chart name.

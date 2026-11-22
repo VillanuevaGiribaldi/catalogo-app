@@ -27,6 +27,11 @@ spec:
         ports:
         - containerPort: 8000
         env:
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: catalogo-db-secret
+                key: MONGO_INITDB_ROOT_USERNAME
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:

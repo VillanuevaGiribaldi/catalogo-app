@@ -3,7 +3,7 @@ data:
   DB_HOST: catalogo-db
   DB_NAME: catalogodb
   DB_PORT: "27017"
-  DB_USER: catalogo_user
+#  DB_USER: catalogo_user
   ROOT_PATH: /api
   SEED_DEMO: "true"
 kind: ConfigMap
